@@ -55,7 +55,7 @@ public class SISMain {
         User_Teacher ramses = new User_Teacher("user3", "pass3", "Science");
         db.user_list.add(ramses);
 
-        User_Admin test = new User_Admin("user1", "password1", "leader");
+        User_Admin test = new User_Admin("user1", "pass1", "leader");
         db.user_list.add(test);
 
         /**Make sections**/
@@ -160,7 +160,9 @@ public class SISMain {
 
     }
     
-    public static void createTeacher(String x, String y, String z){
+    /** Admin commands **/
+   
+    public static void create(String x, String y, String z){
         
         if(x.equals("teacher")){
             
@@ -219,6 +221,18 @@ public class SISMain {
         
     }
     
+    public static void createCourse(String s){
+        Course temp = new Course(s);
+        db.course_list.add(temp);
+        System.out.println("Created new course: " + s);
+    }
+    
+    public static void createSection(String x, String y){
+        
+    }
+    
+    
+    /** Teacher commands **/ 
     public static void createAssignment(String x, String p, String z){
 				//coursename, section_title, assignmentname		
 		
@@ -268,7 +282,10 @@ public class SISMain {
 
         //String currentUser = (c != d) "dog":"cat";
     }
-
+    
+    public static void MySections(){
+        
+    }
     public static void main(String args[]) {
 
         // notice how we can initialize and start SISMain without instantiating

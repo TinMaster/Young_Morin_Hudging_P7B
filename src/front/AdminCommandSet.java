@@ -10,23 +10,14 @@ public class AdminCommandSet extends CommandSet{
     
     public AdminCommandSet(){ 
         super(); //make the base CommandSet
-        commands.put("test", new testCmd());
         commands.put("create", new createCmd());
-    }
-    
-    class testCmd implements Command{
-        public void run(String[] params){
-            System.out.println("x");
-        }
-        public String helpString(){
-            return "test";
-        }
+        commands.put("createCourse", new createCourseCmd());
     }
     
     class createCmd implements Command{
         public void run(String[] params){
             try{
-                SISMain.createTeacher(params[0], params[1], params[2]);
+                SISMain.create(params[0], params[1], params[2]);
             }catch(ArrayIndexOutOfBoundsException ex){ //catch all error if theres no input there
                 System.out.println("Error");
             }
@@ -34,7 +25,22 @@ public class AdminCommandSet extends CommandSet{
         }
         
         public String helpString(){
-            return "Creates a teacher";
+            return "Creates a user of the type given";
+        }
+    }
+    
+    class createCourseCmd implements Command{
+        public void run(String[] params){
+            try{
+                SISMain.createCourse(params[0]);
+            }catch(ArrayIndexOutOfBoundsException ex){
+                System.out.println("Error");
+            }
+
+        }
+        
+        public String helpString(){
+            return "Creates a course";
         }
     }
 }
