@@ -228,6 +228,22 @@ public class SISMain {
     }
     
     public static void createSection(String x, String y){
+        //String x = course name
+        for(Course course: db.course_list){
+            if(course.title.equals(x)){
+                Section temp = new Section(x);
+            }
+            else{
+                System.out.println("Invalid course");
+            }
+        }
+        
+        for(User user : db.user_list){
+            if(user.username.equals(y)){
+                temp.setTeacher(user);
+            }
+        }
+        
         
     }
     

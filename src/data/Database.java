@@ -27,7 +27,6 @@ public class Database {
         return info;
     }
     
-    
     public void deleteCourse(Course x){
         //iterate through array_list course and delete it there
         
