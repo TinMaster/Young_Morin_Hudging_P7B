@@ -12,6 +12,7 @@ public class AdminCommandSet extends CommandSet{
         super(); //make the base CommandSet
         commands.put("create", new createCmd());
         commands.put("createCourse", new createCourseCmd());
+        commands.put("createSection", new createSectionCmd());
     }
     
     class createCmd implements Command{
@@ -41,6 +42,20 @@ public class AdminCommandSet extends CommandSet{
         
         public String helpString(){
             return "Creates a course";
+        }
+    }
+    
+    class createSectionCmd implements Command{
+        public void run(String[] params){
+            try{
+                SISMain.createSection(params[0], params[1], params[1]);
+            }catch(ArrayIndexOutOfBoundsException ex){
+                System.out.println("Error");
+            }
+        }
+        
+        public String helpString(){
+            return "Creates a class";
         }
     }
 }
