@@ -40,7 +40,7 @@ public class Database {
 
     /** Get Methods**/
 
-    public Course getCourse(){
+    public Course getCourse(String x){
         for(Course course: this.course_list){
             if(course.title.equals(x)){
                 return course;
@@ -49,7 +49,7 @@ public class Database {
         return null;
     }
 
-    public User getUser(){
+    public User getUser(String x){
         for(User user: this.user_list){
             if(user.username.equals(x)){
                 return user;
@@ -57,7 +57,18 @@ public class Database {
         }
         return null;
     }
-    
+
+    public Section getSection(String x){
+        for(Course parent: this.course_list){
+            for(Section section: parent.section_list){
+                if(section.title.equals(x)){
+                    return section;
+                }
+            }
+        }
+        return null;
+    }
+
     /** To string methods **/
     public String getCourseInfo(Course x){
         //return course info

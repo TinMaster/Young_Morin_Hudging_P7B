@@ -179,7 +179,6 @@ public class SISMain {
 
             String ms = scan.next();
 
-
             User_Teacher blank = new User_Teacher(y,z,ms);
             db.user_list.add(blank);
             System.out.println("Deparment: " + ms);
@@ -287,40 +286,67 @@ public class SISMain {
 
 		/** Student Commands **/
 
-		//TODO: Join
+		public static void joinSection(x){
+            //student has a classes enrolled list
+        }
 
 		/** View Commands **/
 
 		//Admin
 		public static void viewUser(String x){
-				System.out.println(db.getUserInfo(getUser(x)));
+
+            User temp = db.getUser(x);
+
+            //base info
+            System.out.println(db.getUserInfo(temp);
+
+            //print out addiational info depending on what type of user it is
+            if(temp instanceof User_Teacher){
+                System.out.println(temp.getDepartment);
+            }
+
+            else if(temp instanceof User_Student){
+                System.out.println(temp.getYOG);
+            }
+
+            else if(temp instance of User_Admin){
+                System.out.prinln(temp.getTitle);
+            }
+
+            else{
+                System.out.println("Error");
+            }
 		}
 
 		public static void viewCourse(String x){
-				System.out.println(db.getCourseInfo(getCourse(x)));
+            Course course = db.getCourse(x);
+			System.out.println(course.getCourseInfo);
+            System.out.println(course.listSection());
 		}
 
 		public static void viewSection(String x){
-				//print out the sections of the given course
-				System.out.println(db.getCourse(x).section_list);
-
+			//view section info
+            for(Course parent : db.course_list){
+                for(Section section : parent.section_list){
+                    //if its the course we're looking for and they teach the course
+                    if(section.title.equals(x) && section.Teacher = currentUser){
+                        System.out.println("Section Info \n -------------------");
+                        System.out.println(section.toString());
+                    }
+                }
+            }
 		}
 		//Teacher
-		public stastic void viewStudent(){
-			//can only view students in their classes
+		public stastic void viewStudent(String x){
+
 
 		}
 
-		//Student
-			//Teacher aswell
+		//Student & Teacher
 		public static void viewAssignment(){
 
 		}
 
-		public static void joinSection(){
-				//print out avaible stuff
-			 //join a class
-		}
 
 }
 
