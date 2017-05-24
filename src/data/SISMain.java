@@ -252,9 +252,11 @@ public class SISMain {
 				//coursename, section_title, assignmentname
 
 		//Wouldnt a cleaner way of debugging it would be to put the print out statemts just in the if statements?
+				//coursename, section_title, assignmentname		
         boolean flag = false;
         boolean flag2 = false;
         boolean flag3 = false;
+        
         for(int i = 0; i< db.course_list.size(); i++){
         	if(x == db.course_list.get(i).title){
         	flag2 = true;
