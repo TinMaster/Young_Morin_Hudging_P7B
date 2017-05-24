@@ -229,11 +229,13 @@ public class SISMain {
         System.out.println("Created new course: " + s);
     }
 
-    public static void createSection(String courseTitle, String sectionTitle String username){
-        if(chkUser(username) && chkCourse(courseTitle)){ //if the Course and User exist
-            if(getUser(username) instanceof User_Teacher){
-                Section temp = new Section(db.getCourse(courseTitle), sectionTitle, teacher);
-                db.add(temp);
+    public static void createSection(String courseTitle, String sectionTitle, String username){
+        
+    	//Shouldve used getUser != null
+    	if(db.chkUser(username) && db.chkCourse(courseTitle)){ //if the Course and User exist
+            if(db.getUser(username) instanceof User_Teacher){
+                Section temp = new Section(db.getCourse(courseTitle), sectionTitle, db.getUser(username));
+                db.getCourse(courseTitle).section_list.add(temp);
             }
             else{
                 System.out.println("Error - " + username + " is not a teacher");
@@ -286,7 +288,7 @@ public class SISMain {
 
     /** Student Commands **/
 
-    public static void joinSection(x){
+    public static void joinSection(String x){
         //student has a classes enrolled list
     }
 
@@ -294,23 +296,20 @@ public class SISMain {
 
     //Admin
     public static void viewUser(String x){
-
-        User temp = db.getUser(x);
-
-        //base info
-        System.out.println(db.getUserInfo(temp);
+    	
+        System.out.println(db.getUserInfo(temp));
 
         //print out addiational info depending on what type of user it is
-        if(temp instanceof User_Teacher){
-            System.out.println(temp.getDepartment);
+        if(db.getUser(x) instanceof User_Teacher){
+            System.out.println(db.getUser(x).getDepartment());
         }
 
-        else if(temp instanceof User_Student){
-            System.out.println(temp.getYOG);
+        else if(db.getUser(x) instanceof User_Student){
+            System.out.println(db.getUser(x).getYOG());
         }
 
-        else if(temp instance of User_Admin){
-            System.out.prinln(temp.getTitle);
+        else if(db.getUser(x) instanceof User_Admin){
+            System.out.prinln(db.getUser(x).getTitle());
         }
 
         else{
@@ -320,8 +319,8 @@ public class SISMain {
 
     public static void viewCourse(String x){
         Course course = db.getCourse(x);
-        System.out.println(course.getCourseInfo);
-        System.out.println(course.listSection());
+        System.out.println(db.getCourseInfo(course));
+        System.out.println(db.getCourse(course).listSection());
     }
 
     public static void viewSection(String x){
@@ -329,7 +328,7 @@ public class SISMain {
         for(Course parent : db.course_list){
             for(Section section : parent.section_list){
                 //if its the course we're looking for and they teach the course
-                if(section.title.equals(x) && section.Teacher = currentUser){
+                if(section.title.equals(x) && section.Teacher.equals(currentUser)){
                     System.out.println("Section Info \n -------------------");
                     System.out.println(section.toString());
                 }
@@ -337,7 +336,7 @@ public class SISMain {
         }
     }
     //Teacher
-    public stastic void viewStudent(String x){
+    public static void viewStudent(String x){
 
 
     }
