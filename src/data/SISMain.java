@@ -227,49 +227,22 @@ public class SISMain {
         System.out.println("Created new course: " + s);
     }
 
-    public static void createSection(String x, String z, String y){
+    public static void createSection(String courseTitle, String sectionTitle String username){
         //String x = course.title
         //String z = section.title i.e. English11b in the course English11
         //String y = user.username
 
-        //TODO: make a getter method that returns true or false if the object is found perhaps or just return the obj
-
-        Section temp = null;
-        boolean flag = false;
-
-        //iterate through course_list and look for the course
-
-        for(Course course: db.course_list){
-            if(course.title.equals(x)){
-                temp = new Section(course, z);
-                course.section_list.add(temp);
-                System.out.println("Found course: " + x);
+        if(chkUser(username) && chkCourse(courseTitle)){ //if the Course and User exist
+            if(getUser(username) instanceof User_Teacher){
+                Section temp = new Section(db.getCourse(courseTitle), sectionTitle, teacher);
+                db.add(temp);
+            }
+            else{
+                System.out.println("Error - " + username + " is not a teacher");
             }
         }
-
-        //TODO: it breaks here
-        //iterate through user_list and look for the user
-        if(temp != null){
-            for(User teacher: db.user_list){
-                if(teacher.username.equals(y)){
-                    temp.setTeacher(teacher);
-                    System.out.println("Found user: " + y);
-                    flag = true;
-                }
-            }
-        }
-
-        //Check to see if course was created
-        if(temp != null && flag){
-            for(Course course: db.course_list){
-                if(course.title.equals(x)){
-                    for(Section section: course.section_list){
-                        if(section.title.equals(z)){
-                            System.out.println("Created new section " + z);
-                        }
-                    }
-                }
-            }
+        else{
+            System.out.println("Error - Couldn't find: " + username + " " + courseTitle);
         }
     }
 
