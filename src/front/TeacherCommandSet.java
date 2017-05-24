@@ -34,13 +34,13 @@ public class TeacherCommandSet extends CommandSet{
         }
     }   
     
-    class MySections implements Command{
+    class MySectionsCmd implements Command{
         public void run(String[] params){
             //create User Object
             //then add to db.user_list
             try{
                 
-                SISMain.MySections();
+                SISMain.ListMySections();
                 //coursename, section#, assignmentname
             }catch(ArrayIndexOutOfBoundsException ex){
                 System.out.println("Error");

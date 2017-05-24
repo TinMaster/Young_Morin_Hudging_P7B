@@ -1,4 +1,3 @@
-
 package data;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class Section {
     }
     
     // ?????
-    public Section(Course parent, String title, User teach){
+    public Section(Course parent, String title, user.User_Teacher teach){
         this.number = sectionNumber;
         this.teacher = teach;
         this.parent = parent;

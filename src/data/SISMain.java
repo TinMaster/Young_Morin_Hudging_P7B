@@ -227,12 +227,16 @@ public class SISMain {
         System.out.println("Created new course: " + s);
     }
     
-    public static void createSection(String x, String y){
+    //public static void createSection(String x, String y){
+      //  Section temp = new Section(x,y);
+        
+    //}
+    
+        /** Teacher commands **/ 
+    public static void ListMySections(){
         
     }
     
-    
-    /** Teacher commands **/ 
     public static void createAssignment(String x, String p, String z){
 				//coursename, section_title, assignmentname		
 		
@@ -242,9 +246,9 @@ public class SISMain {
         boolean flag3 = false;
         for(int i = 0; i< db.course_list.size(); i++){
         	if(x == db.course_list.get(i).title){
-        	flag2 = true;
-			Course currentCourse = db.course_list.get(i);
-    			for(int j = 0; j < currentCourse.section_list.size(); j++){
+        	   flag2 = true;
+			   Course currentCourse = db.course_list.get(i);
+    		    for(int j = 0; j < currentCourse.section_list.size(); j++){
     				if(p == currentCourse.section_list.get(j).title){
     					Section currentSection = currentCourse.section_list.get(j);
     					currentSection.assignment_list.add(z);
@@ -283,9 +287,7 @@ public class SISMain {
         //String currentUser = (c != d) "dog":"cat";
     }
     
-    public static void MySections(){
-        
-    }
+    
     public static void main(String args[]) {
 
         // notice how we can initialize and start SISMain without instantiating

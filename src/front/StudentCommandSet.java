@@ -2,13 +2,15 @@ package front;
 
 import java.util.HashMap; 
 
+import data.SISMain;
+
 public class StudentCommandSet extends CommandSet {
     
     HashMap<String, Command> commands;
     
     public StudentCommandSet(){
         super();
-        //commands.put("viewsection", new viewsection());
+        commands.put("viewsection", new viewSection());
     }
     
     class helpCmd implements Command{ 
@@ -20,18 +22,30 @@ public class StudentCommandSet extends CommandSet {
              
             System.out.println(""); 
         } 
-        
-  /*      
-        class viewsection implements Command{
-            public void run(String[] params){
-                System.out.println("Section: ");
+        public String helpString(){ 
+            return "prints available commands"; 
+        }
+    }
+
+    
+
+    class viewSection implements Command{
+        public void run(String[] params){
+            try{
+                
+                //SISMain.ListMySections();
+            }catch(ArrayIndexOutOfBoundsException ex){
+                System.out.println("Error");
+            }
+        }
+            public String helpString(){
+                return "Lists sections the student is in";
             }
 
         }
-        */
         
-        public String helpString(){ 
-            return "prints available commands"; 
-        } 
-    } 
-}
+        
+        
+    }
+    
+    

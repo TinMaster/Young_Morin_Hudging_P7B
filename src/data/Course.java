@@ -2,6 +2,7 @@
 package data;
 
 import data.user.*;
+import data.*;
 import java.util.ArrayList;
 
 public class Course {
@@ -32,9 +33,10 @@ public class Course {
         this.section_list.add(a);
     }
     
-    public void createSection(String name, User teacher){
+    public void createSection(String name, user.User_Teacher teacher){
         Section a = new Section(this, name, teacher);
         this.section_list.add(a);
+        teacher.MySections.add(a); //WHY THIS DATA TYPE NOT RIGHT HELP ME
     }
     
     public void createSection(User id){
