@@ -186,7 +186,7 @@ public class SISMain {
             System.out.println("Created a new teacher");
             //TODO: command to assign teacher to sections
         }
-
+		//test atom
         else if(x.equals("student")){
 
             Scanner scan = new Scanner(System.in);
@@ -303,10 +303,12 @@ public class SISMain {
 		public static void viewSection(String x){
 				//print out the sections of the given course
 				System.out.println(db.getCourse(x).section_list);
+
 		}
 		//Teacher
 		public stastic void viewStudent(){
 			//can only view students in their classes
+
 		}
 
 		//Student

@@ -25,6 +25,7 @@ public class Course {
         courseNumber++;
     }
 
+
     public void createSection(String name){
         Section a = new Section(this, name);
         this.section_list.add(a);
