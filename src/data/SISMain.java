@@ -65,7 +65,7 @@ public class SISMain {
         course4.createSection("Soc_class1");
         course5.createSection("Sci_class1");
 
-        
+
         /**Create CLI**/
         cli = new CLI();
 
@@ -124,7 +124,7 @@ public class SISMain {
             }
         }
 
-        //if flag == false - if user wasn't found in database or if user is already logged in 
+        //if flag == false - if user wasn't found in database or if user is already logged in
         else {
             System.out.println(currentUser != null ? "Error - Please Logout First" : "Login Failed");
         }
@@ -159,36 +159,36 @@ public class SISMain {
         }
 
     }
-    
+
     /** Admin commands **/
-   
+
     public static void create(String x, String y, String z){
-        
+
         if(x.equals("teacher")){
-            
+
             Scanner scan = new Scanner(System.in);
             System.out.print("Please enter a department: ");
-            
+
             while(scan.hasNextInt()){ //while theres a int
                 System.out.print("Please enter a department: ");
                 scan.next();
             }
-            
-            String ms = scan.next();  
-            
-            
+
+            String ms = scan.next();
+
+
             User_Teacher blank = new User_Teacher(y,z,ms);
             db.user_list.add(blank);
             System.out.println("Deparment: " + ms);
             System.out.println("Created a new teacher");
             //TODO: command to assign teacher to sections
         }
-        
+
         else if(x.equals("student")){
-            
+
             Scanner scan = new Scanner(System.in);
             int num;
-            
+
             do {
                 System.out.print("Please enter the year of graduation: ");
                 while(!scan.hasNextInt()){
@@ -197,90 +197,62 @@ public class SISMain {
                 }
                 num = scan.nextInt();
             } while (num < 1000 || num > 10000);
-            
+
             System.out.println("Year: " + num);
             User_Student blank = new User_Student(y,z, num);
             db.user_list.add(blank);
-            System.out.println("Created a new student"); 
-            
+            System.out.println("Created a new student");
+
         }
-        
+
         else if(x.equals("admin")){
             Scanner scan = new Scanner(System.in);
-            
+
             while(!scan.hasNext()){
                 System.out.print("Please enter a title: ");
                 scan.next();
             }
-            
+
             String ms = scan.next();
             User_Teacher blank = new User_Teacher(y,z,ms);
             db.user_list.add(blank);
             System.out.println("Created a new Admin");
         }
-        
+
     }
-    
+
     public static void createCourse(String s){
         Course temp = new Course(s);
         db.course_list.add(temp);
         System.out.println("Created new course: " + s);
     }
-    
-    public static void createSection(String x, String z, String y){
+
+    public static void createSection(String courseTitle, String sectionTitle String username){
         //String x = course.title
         //String z = section.title i.e. English11b in the course English11
         //String y = user.username
-        
-        //TODO: make a getter method that returns true or false if the object is found perhaps or just return the obj 
-        
-        Section temp = null;
-        boolean flag = false;
-        
-        //iterate through course_list and look for the course
-        
-        for(Course course: db.course_list){
-            if(course.title.equals(x)){
-                temp = new Section(course, z);
-                course.section_list.add(temp);
-                System.out.println("Found course: " + x);
-            }
-        }
-        
-        //TODO: it breaks here
-        //iterate through user_list and look for the user
-        if(temp != null){
-            for(User teacher: db.user_list){
-                if(teacher.username.equals(y)){
-                    temp.setTeacher(teacher);
-                    System.out.println("Found user: " + y);
-                    flag = true;
-                }
-            }
-        }
-        
-        //Check to see if course was created
-        if(temp != null && flag){
-            for(Course course: db.course_list){
-                if(course.title.equals(x)){
-                    for(Section section: course.section_list){
-                        if(section.title.equals(z)){
-                            System.out.println("Created new section " + z);
-                        }
-                    }
-                }
-            }
-        }
-        
-        
-        
-    }
-    
-    
-    /** Teacher commands **/ 
-    public static void createAssignment(String x, String p, String z){
-				//coursename, section_title, assignmentname		
 
+        if(chkUser(username) && chkCourse(courseTitle)){ //if the Course and User exist
+            if(getUser(username) instanceof User_Teacher){
+                Section temp = new Section(db.getCourse(courseTitle), sectionTitle, teacher);
+                db.add(temp);
+            }
+            else{
+                System.out.println("Error - " + username + " is not a teacher");
+            }
+        }
+        else{
+            System.out.println("Error - Couldn't find: " + username + " " + courseTitle);
+        }
+    }
+
+
+    /** Teacher commands **/
+    public static void createAssignment(String x, String p, String z){
+				//coursename, section_title, assignmentname
+
+		//Wouldnt a cleaner way of debugging it would be to put the print out statemts just in the if statements?
+				//coursename, section_title, assignmentname		
         boolean flag = false;
         boolean flag2 = false;
         boolean flag3 = false;
@@ -304,7 +276,7 @@ public class SISMain {
     		System.out.println(z + "added as assignment to " + x);
     	}else{
     		System.out.println("How did you get here?");
-   
+
         if(!flag2){
 		System.out.println("cOURSE tITLE nOT rECOGNIZED");
     	}else if(flag2){
@@ -327,9 +299,9 @@ public class SISMain {
 
         //String currentUser = (c != d) "dog":"cat";
     }
-    
+
     public static void MySections(){
-        
+
     }
     public static void main(String args[]) {
 
