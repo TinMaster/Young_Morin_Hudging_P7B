@@ -282,73 +282,71 @@ public class SISMain {
     		System.out.println("How did you get here?");
     	}
 		}
+    }
 
+    /** Student Commands **/
 
-		/** Student Commands **/
+    public static void joinSection(x){
+        //student has a classes enrolled list
+    }
 
-		public static void joinSection(x){
-            //student has a classes enrolled list
+    /** View Commands **/
+
+    //Admin
+    public static void viewUser(String x){
+
+        User temp = db.getUser(x);
+
+        //base info
+        System.out.println(db.getUserInfo(temp);
+
+        //print out addiational info depending on what type of user it is
+        if(temp instanceof User_Teacher){
+            System.out.println(temp.getDepartment);
         }
 
-		/** View Commands **/
+        else if(temp instanceof User_Student){
+            System.out.println(temp.getYOG);
+        }
 
-		//Admin
-		public static void viewUser(String x){
+        else if(temp instance of User_Admin){
+            System.out.prinln(temp.getTitle);
+        }
 
-            User temp = db.getUser(x);
+        else{
+            System.out.println("Error");
+        }
+    }
 
-            //base info
-            System.out.println(db.getUserInfo(temp);
+    public static void viewCourse(String x){
+        Course course = db.getCourse(x);
+        System.out.println(course.getCourseInfo);
+        System.out.println(course.listSection());
+    }
 
-            //print out addiational info depending on what type of user it is
-            if(temp instanceof User_Teacher){
-                System.out.println(temp.getDepartment);
-            }
-
-            else if(temp instanceof User_Student){
-                System.out.println(temp.getYOG);
-            }
-
-            else if(temp instance of User_Admin){
-                System.out.prinln(temp.getTitle);
-            }
-
-            else{
-                System.out.println("Error");
-            }
-		}
-
-		public static void viewCourse(String x){
-            Course course = db.getCourse(x);
-			System.out.println(course.getCourseInfo);
-            System.out.println(course.listSection());
-		}
-
-		public static void viewSection(String x){
-			//view section info
-            for(Course parent : db.course_list){
-                for(Section section : parent.section_list){
-                    //if its the course we're looking for and they teach the course
-                    if(section.title.equals(x) && section.Teacher = currentUser){
-                        System.out.println("Section Info \n -------------------");
-                        System.out.println(section.toString());
-                    }
+    public static void viewSection(String x){
+        //view section info
+        for(Course parent : db.course_list){
+            for(Section section : parent.section_list){
+                //if its the course we're looking for and they teach the course
+                if(section.title.equals(x) && section.Teacher = currentUser){
+                    System.out.println("Section Info \n -------------------");
+                    System.out.println(section.toString());
                 }
             }
-		}
-		//Teacher
-		public stastic void viewStudent(String x){
+        }
+    }
+    //Teacher
+    public stastic void viewStudent(String x){
 
 
-		}
+    }
 
-		//Student & Teacher
-		public static void viewAssignment(){
+    //Student & Teacher
+    public static void viewAssignment(){
 
-		}
+    }
 
-
-}
 
     //umm.... Unit Testing for ternary operators?
     public static void Dead() {
