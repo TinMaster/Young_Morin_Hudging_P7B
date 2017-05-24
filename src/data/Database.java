@@ -79,6 +79,10 @@ public class Database {
     public String getUserInfo(User x ){
         //return user info
         String info = Integer.toString(x.id) + "," + x.username + "," + x.password;
+
+
+        }
+
         return info;
     }
 
