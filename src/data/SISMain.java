@@ -75,6 +75,8 @@ public class SISMain {
     }
 
 
+		/** General Commands**/
+
     public static void login(String username, String password) {
 
         // try to find a User in the db with given credentials
@@ -160,6 +162,7 @@ public class SISMain {
 
     }
 
+
     /** Admin commands **/
 
     public static void create(String x, String y, String z){
@@ -228,10 +231,6 @@ public class SISMain {
     }
 
     public static void createSection(String courseTitle, String sectionTitle String username){
-        //String x = course.title
-        //String z = section.title i.e. English11b in the course English11
-        //String y = user.username
-
         if(chkUser(username) && chkCourse(courseTitle)){ //if the Course and User exist
             if(getUser(username) instanceof User_Teacher){
                 Section temp = new Section(db.getCourse(courseTitle), sectionTitle, teacher);
@@ -248,15 +247,14 @@ public class SISMain {
 
 
     /** Teacher commands **/
+
     public static void createAssignment(String x, String p, String z){
 				//coursename, section_title, assignmentname
 
 		//Wouldnt a cleaner way of debugging it would be to put the print out statemts just in the if statements?
-				//coursename, section_title, assignmentname		
         boolean flag = false;
         boolean flag2 = false;
         boolean flag3 = false;
-        
         for(int i = 0; i< db.course_list.size(); i++){
         	if(x == db.course_list.get(i).title){
         	flag2 = true;
@@ -284,7 +282,44 @@ public class SISMain {
     	}else{
     		System.out.println("How did you get here?");
     	}
-}
+		}
+
+
+		/** Student Commands **/
+
+		//TODO: Join
+
+		/** View Commands **/
+
+		//Admin
+		public static void viewUser(String x){
+				System.out.println(db.getUserInfo(getUser(x)));
+		}
+
+		public static void viewCourse(String x){
+				System.out.println(db.getCourseInfo(getCourse(x)));
+		}
+
+		public static void viewSection(String x){
+				//print out the sections of the given course
+				System.out.println(db.getCourse(x).section_list);
+		}
+		//Teacher
+		public stastic void viewStudent(){
+			//can only view students in their classes
+		}
+
+		//Student
+			//Teacher aswell
+		public static void viewAssignment(){
+
+		}
+
+		public static void joinSection(){
+				//print out avaible stuff
+			 //join a class
+		}
+
 }
 
     //umm.... Unit Testing for ternary operators?
