@@ -13,6 +13,7 @@ public class AdminCommandSet extends CommandSet{
         commands.put("create", new createCmd());
         commands.put("createCourse", new createCourseCmd());
         commands.put("createSection", new createSectionCmd());
+        commands.put("view", new viewUserCmd());
     }
 
     class createCmd implements Command{
@@ -59,5 +60,21 @@ public class AdminCommandSet extends CommandSet{
         }
     }
 
-    class
+    /** View Commands **/ 
+    class viewUserCmd implements Command{
+    	public void run(String[] params){
+    		try{
+    			SISMain.viewUser(params[0]);
+    		}catch(ArrayIndexOutOfBoundsException ex){
+    			System.out.println("Error");
+    		}
+    	}
+    	
+    	public String helpString(){
+    		return "view a user";
+    	}	
+    }
+    
+    
+    
 }

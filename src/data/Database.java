@@ -57,7 +57,8 @@ public class Database {
         }
         return null;
     }
-
+    
+    
     public Section getSection(String x){
         for(Course parent: this.course_list){
             for(Section section: parent.section_list){
@@ -75,14 +76,10 @@ public class Database {
         String info = x.title + "," + x.number;
         return info;
     }
-
+  
     public String getUserInfo(User x ){
         //return user info
         String info = Integer.toString(x.id) + "," + x.username + "," + x.password;
-
-
-        }
-
         return info;
     }
 
@@ -131,4 +128,5 @@ public class Database {
             System.out.println(user_list.get(i).id + ": " + user_list.get(i).username);
         }
     }
+
 }

@@ -231,11 +231,12 @@ public class SISMain {
 
     public static void createSection(String courseTitle, String sectionTitle, String username){
         
-    	//Shouldve used getUser != null
+    	//Should've used getUser != null
     	if(db.chkUser(username) && db.chkCourse(courseTitle)){ //if the Course and User exist
             if(db.getUser(username) instanceof User_Teacher){
                 Section temp = new Section(db.getCourse(courseTitle), sectionTitle, db.getUser(username));
                 db.getCourse(courseTitle).section_list.add(temp);
+                System.out.println("Success");
             }
             else{
                 System.out.println("Error - " + username + " is not a teacher");
@@ -297,30 +298,51 @@ public class SISMain {
     //Admin
     public static void viewUser(String x){
     	
-        System.out.println(db.getUserInfo(temp));
-
-        //print out addiational info depending on what type of user it is
-        if(db.getUser(x) instanceof User_Teacher){
-            System.out.println(db.getUser(x).getDepartment());
+    	User_Teacher teacher;
+    	User_Admin admin;
+    	User_Student student;
+    	User temp = db.getUser(x);
+    	
+    	//Split up the getUserInfo String
+    	String s = db.getUserInfo(temp);
+    	String[] info = s.split(",");
+    	String output = "Id: "+ info[0] + "\n" + 
+    					"Username:  " + info[1] + "\n" + 
+    					"Password: " + info[2];
+    	
+    	System.out.println("\nUser Info \n----------");
+    	System.out.println(output);
+    	
+        //TODO: understand this code
+        
+        //print out additional info depending on what type of user it is
+        if (temp instanceof User_Teacher) {
+        	teacher = (User_Teacher) temp; //shot in the dark
+        	System.out.println("Department: " + teacher.getDepartment());
+        	//Found by eclipse auto complete: ((User_Teacher) temp).getDepartment();
+        	//temp.getDepartment();
+     
+		} 
+        
+        else if(temp instanceof User_Student){
+        	student = (User_Student) temp;
+        	System.out.println("YOG: " + student.getYOG());
         }
-
-        else if(db.getUser(x) instanceof User_Student){
-            System.out.println(db.getUser(x).getYOG());
+        
+        else if(temp instanceof User_Admin){
+        	admin = (User_Admin) temp;
+        	System.out.println("Title: " + admin.getTitle());
         }
-
-        else if(db.getUser(x) instanceof User_Admin){
-            System.out.prinln(db.getUser(x).getTitle());
-        }
-
-        else{
-            System.out.println("Error");
-        }
+        
+        else {
+        	System.out.println("No additional info (type: User)");
+		}
     }
 
     public static void viewCourse(String x){
         Course course = db.getCourse(x);
         System.out.println(db.getCourseInfo(course));
-        System.out.println(db.getCourse(course).listSection());
+        System.out.println(db.getCourse(course.title).listSection());
     }
 
     public static void viewSection(String x){
@@ -328,7 +350,7 @@ public class SISMain {
         for(Course parent : db.course_list){
             for(Section section : parent.section_list){
                 //if its the course we're looking for and they teach the course
-                if(section.title.equals(x) && section.Teacher.equals(currentUser)){
+                if(section.title.equals(x) && section.teacher.equals(currentUser)){
                     System.out.println("Section Info \n -------------------");
                     System.out.println(section.toString());
                 }
@@ -337,7 +359,7 @@ public class SISMain {
     }
     //Teacher
     public static void viewStudent(String x){
-
+    	
 
     }
 
@@ -363,6 +385,7 @@ public class SISMain {
     public static void MySections(){
 
     }
+    
     public static void main(String args[]) {
 
         // notice how we can initialize and start SISMain without instantiating

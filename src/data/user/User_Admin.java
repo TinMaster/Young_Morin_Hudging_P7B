@@ -9,8 +9,8 @@ public class User_Admin extends User{
         this.title = "";
     }
     
-    public String getTitle(User_Admin x){
-        return x.title;
+    public String getTitle(){
+        return this.title;
     }
         
 }

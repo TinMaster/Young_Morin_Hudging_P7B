@@ -12,8 +12,8 @@ public class User_Teacher extends User{
         this.MySections = new ArrayList<data.Section>();
     }
     
-    public String getDepartment(User_Teacher x){
-        return x.department;
+    public String getDepartment(){
+        return this.department;
     }
     
     public static String getTeacher(User_Teacher x){
