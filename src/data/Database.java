@@ -86,7 +86,7 @@ public class Database {
     public void deleteCourse(Course x){
         //iterate through array_list course and delete it there
 
-        if(course_list.remove(x) == true){ //returns false if its not there
+        if(course_list.remove(x)){ //returns false if its not there
             System.out.println("Deleted " + x.title);
         }
         else{
@@ -102,7 +102,7 @@ public class Database {
 
     public void deleteUser(User x){
     //iterate through array_list user and delete it there
-        if(user_list.remove(x) == true){ //returns false if its not there
+        if(user_list.remove(x)){ //returns false if its not there
             System.out.println("Deleted " + x.id + ": " + x.username);
         }
         else{
