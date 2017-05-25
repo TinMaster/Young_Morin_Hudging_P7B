@@ -1,15 +1,19 @@
 package data.user;
 
+import java.util.ArrayList;
+
 public class User_Student extends User{
     public int yog;
-
+    
+    public ArrayList<User> esection_list;
+    
     public User_Student(String u, String p, int x){
         super(u,p);
         this.yog = x;
-        this.class_list = new ArrayList<Section>
+        this.esection_list = new ArrayList();
     }
 
-    public int getYOG(User_Student x){
-        return x.yog;
+    public int getYOG(){
+        return this.yog;
     }
 }

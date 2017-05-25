@@ -53,7 +53,7 @@ public class Section {
 
         String s =  "Number: " + this.number + "\n" +
                     "Title: " + this.title + "\n" +
-                    "Teacher: " +this.teacher + "\n"
+                    "Teacher: " +this.teacher + "\n" + 
                     "Student List: ";
 
         for(int i=0; i<this.student_list.size(); i++){
@@ -63,7 +63,7 @@ public class Section {
         s += "\n" + "Assignment List: ";
 
         for(String x : this.assignment_list){
-            s += x + ","
+            s += x + ",";
         }
 
         return s;

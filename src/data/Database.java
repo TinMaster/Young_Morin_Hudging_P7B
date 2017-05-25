@@ -57,7 +57,8 @@ public class Database {
         }
         return null;
     }
-
+    
+    
     public Section getSection(String x){
         for(Course parent: this.course_list){
             for(Section section: parent.section_list){
@@ -75,21 +76,17 @@ public class Database {
         String info = x.title + "," + x.number;
         return info;
     }
-
+  
     public String getUserInfo(User x ){
         //return user info
         String info = Integer.toString(x.id) + "," + x.username + "," + x.password;
-
-
-        }
-
         return info;
     }
 
     public void deleteCourse(Course x){
         //iterate through array_list course and delete it there
 
-        if(course_list.remove(x) == true){ //returns false if its not there
+        if(course_list.remove(x)){ //returns false if its not there
             System.out.println("Deleted " + x.title);
         }
         else{
@@ -105,7 +102,7 @@ public class Database {
 
     public void deleteUser(User x){
     //iterate through array_list user and delete it there
-        if(user_list.remove(x) == true){ //returns false if its not there
+        if(user_list.remove(x)){ //returns false if its not there
             System.out.println("Deleted " + x.id + ": " + x.username);
         }
         else{
@@ -131,4 +128,5 @@ public class Database {
             System.out.println(user_list.get(i).id + ": " + user_list.get(i).username);
         }
     }
+
 }

@@ -34,5 +34,6 @@ public class User {
     public void join(Section section){
         section.student_list.add(this);
     }
+    
 }
 

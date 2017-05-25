@@ -96,7 +96,7 @@ public class SISMain {
         }
 
 
-        if (flag == true) {
+        if (flag) {
             if (currentUser instanceof User_Admin) {
                 System.out.println("Hello " + currentUser.username);
                 System.out.println("Sup Admin");
@@ -167,7 +167,7 @@ public class SISMain {
 
     public static void create(String x, String y, String z){
 
-        if(x.equals("teacher")){
+        if("teacher".equals(x){
 
             Scanner scan = new Scanner(System.in);
             System.out.print("Please enter a department: ");
@@ -186,7 +186,7 @@ public class SISMain {
             //TODO: command to assign teacher to sections
         }
 		//test atom
-        else if(x.equals("student")){
+        else if("student".equals(x){
 
             Scanner scan = new Scanner(System.in);
             int num;
@@ -207,7 +207,7 @@ public class SISMain {
 
         }
 
-        else if(x.equals("admin")){
+        else if("admin".equals(x){
             Scanner scan = new Scanner(System.in);
 
             while(!scan.hasNext()){
@@ -229,11 +229,14 @@ public class SISMain {
         System.out.println("Created new course: " + s);
     }
 
-    public static void createSection(String courseTitle, String sectionTitle String username){
-        if(chkUser(username) && chkCourse(courseTitle)){ //if the Course and User exist
-            if(getUser(username) instanceof User_Teacher){
-                Section temp = new Section(db.getCourse(courseTitle), sectionTitle, teacher);
-                db.add(temp);
+    public static void createSection(String courseTitle, String sectionTitle, String username){
+        
+    	//Should've used getUser != null
+    	if(db.chkUser(username) && db.chkCourse(courseTitle)){ //if the Course and User exist
+            if(db.getUser(username) instanceof User_Teacher){
+                Section temp = new Section(db.getCourse(courseTitle), sectionTitle, db.getUser(username));
+                db.getCourse(courseTitle).section_list.add(temp);
+                System.out.println("Success");
             }
             else{
                 System.out.println("Error - " + username + " is not a teacher");
@@ -282,73 +285,89 @@ public class SISMain {
     		System.out.println("How did you get here?");
     	}
 		}
+    }
 
+    /** Student Commands **/
 
-		/** Student Commands **/
+    public static void joinSection(String x){
+        //student has a classes enrolled list
+    }
 
-		public static void joinSection(x){
-            //student has a classes enrolled list
+    /** View Commands **/
+
+    //Admin
+    public static void viewUser(String x){
+    	
+    	User_Teacher teacher;
+    	User_Admin admin;
+    	User_Student student;
+    	User temp = db.getUser(x);
+    	
+    	//Split up the getUserInfo String
+    	String s = db.getUserInfo(temp);
+    	String[] info = s.split(",");
+    	String output = "Id: "+ info[0] + "\n" + 
+    					"Username:  " + info[1] + "\n" + 
+    					"Password: " + info[2];
+    	
+    	System.out.println("\nUser Info \n----------");
+    	System.out.println(output);
+    	
+        //TODO: understand this code
+        
+        //print out additional info depending on what type of user it is
+        if (temp instanceof User_Teacher) {
+        	teacher = (User_Teacher) temp; //shot in the dark
+        	System.out.println("Department: " + teacher.getDepartment());
+        	//Found by eclipse auto complete: ((User_Teacher) temp).getDepartment();
+        	//temp.getDepartment();
+     
+		} 
+        
+        else if(temp instanceof User_Student){
+        	student = (User_Student) temp;
+        	System.out.println("YOG: " + student.getYOG());
         }
-
-		/** View Commands **/
-
-		//Admin
-		public static void viewUser(String x){
-
-            User temp = db.getUser(x);
-
-            //base info
-            System.out.println(db.getUserInfo(temp);
-
-            //print out addiational info depending on what type of user it is
-            if(temp instanceof User_Teacher){
-                System.out.println(temp.getDepartment);
-            }
-
-            else if(temp instanceof User_Student){
-                System.out.println(temp.getYOG);
-            }
-
-            else if(temp instance of User_Admin){
-                System.out.prinln(temp.getTitle);
-            }
-
-            else{
-                System.out.println("Error");
-            }
+        
+        else if(temp instanceof User_Admin){
+        	admin = (User_Admin) temp;
+        	System.out.println("Title: " + admin.getTitle());
+        }
+        
+        else {
+        	System.out.println("No additional info (type: User)");
 		}
+    }
 
-		public static void viewCourse(String x){
-            Course course = db.getCourse(x);
-			System.out.println(course.getCourseInfo);
-            System.out.println(course.listSection());
-		}
+    public static void viewCourse(String x){
+        Course course = db.getCourse(x);
+        System.out.println(db.getCourseInfo(course));
+        System.out.println(db.getCourse(course.title).listSection());
+    }
 
-		public static void viewSection(String x){
-			//view section info
-            for(Course parent : db.course_list){
-                for(Section section : parent.section_list){
-                    //if its the course we're looking for and they teach the course
-                    if(section.title.equals(x) && section.Teacher = currentUser){
-                        System.out.println("Section Info \n -------------------");
-                        System.out.println(section.toString());
-                    }
+    public static void viewSection(String x){
+        //view section info
+        for(Course parent : db.course_list){
+            for(Section section : parent.section_list){
+                //if its the course we're looking for and they teach the course
+                if(section.title.equals(x) && section.teacher.equals(currentUser)){
+                    System.out.println("Section Info \n -------------------");
+                    System.out.println(section.toString());
                 }
             }
-		}
-		//Teacher
-		public stastic void viewStudent(String x){
+        }
+    }
+    //Teacher
+    public static void viewStudent(String x){
+    	
 
+    }
 
-		}
+    //Student & Teacher
+    public static void viewAssignment(){
 
-		//Student & Teacher
-		public static void viewAssignment(){
+    }
 
-		}
-
-
-}
 
     //umm.... Unit Testing for ternary operators?
     public static void Dead() {
@@ -366,6 +385,7 @@ public class SISMain {
     public static void MySections(){
 
     }
+    
     public static void main(String args[]) {
 
         // notice how we can initialize and start SISMain without instantiating
