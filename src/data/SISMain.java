@@ -96,7 +96,7 @@ public class SISMain {
         }
 
 
-        if (flag == true) {
+        if (flag) {
             if (currentUser instanceof User_Admin) {
                 System.out.println("Hello " + currentUser.username);
                 System.out.println("Sup Admin");
@@ -167,7 +167,7 @@ public class SISMain {
 
     public static void create(String x, String y, String z){
 
-        if(x.equals("teacher")){
+        if("teacher".equals(x){
 
             Scanner scan = new Scanner(System.in);
             System.out.print("Please enter a department: ");
@@ -186,7 +186,7 @@ public class SISMain {
             //TODO: command to assign teacher to sections
         }
 		//test atom
-        else if(x.equals("student")){
+        else if("student".equals(x){
 
             Scanner scan = new Scanner(System.in);
             int num;
@@ -207,7 +207,7 @@ public class SISMain {
 
         }
 
-        else if(x.equals("admin")){
+        else if("admin".equals(x){
             Scanner scan = new Scanner(System.in);
 
             while(!scan.hasNext()){
